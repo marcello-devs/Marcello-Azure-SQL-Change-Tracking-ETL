@@ -1,0 +1,16 @@
+SELECT CHANGE_TRACKING_CURRENT_VERSION() AS CurrentVersion;--3
+GO
+
+UPDATE dbo.Customers
+SET City = 'Liverpool',
+    LastUpdated = GETDATE()
+WHERE CustomerID = 1;
+GO
+
+SELECT 
+    ct.SYS_CHANGE_VERSION,
+    ct.SYS_CHANGE_OPERATION,
+    ct.CustomerID
+FROM CHANGETABLE(CHANGES dbo.Customers, 3) AS ct
+ORDER BY ct.SYS_CHANGE_VERSION;
+GO
