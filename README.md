@@ -1,5 +1,11 @@
 # Marcello Azure SQL Change Tracking ETL
 
+![Azure](https://img.shields.io/badge/Azure-Cloud-blue)
+![SQL](https://img.shields.io/badge/SQL-ChangeTracking-red)
+![ADF](https://img.shields.io/badge/Azure-DataFactory-purple)
+![ETL](https://img.shields.io/badge/ETL-Incremental-success)
+![GitHub](https://img.shields.io/badge/GitHub-Portfolio-black)
+
 ## Overview
 
 This project demonstrates a cloud-based incremental ETL solution built in Microsoft Azure using **Azure SQL Database**, **SQL Change Tracking**, and **Azure Data Factory (ADF)**.
@@ -15,6 +21,8 @@ The solution captures inserts, updates, and deletes from a source table and appl
 5. Changes load into a staging table
 6. MERGE procedure applies changes to target table `dbo.Customers_ETL`
 7. Watermark updates after successful load
+
+![Architecture](images/architecture-diagram.png)
 
 ## Technologies Used
 
