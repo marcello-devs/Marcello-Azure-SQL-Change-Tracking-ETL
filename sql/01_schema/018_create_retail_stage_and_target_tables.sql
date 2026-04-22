@@ -1,0 +1,70 @@
+CREATE TABLE dbo.Products_ETL (
+    ProductID INT NOT NULL PRIMARY KEY,
+    ProductName NVARCHAR(100) NOT NULL,
+    Category NVARCHAR(50) NOT NULL,
+    UnitPrice DECIMAL(10,2) NOT NULL,
+    IsActive BIT NOT NULL,
+    LastUpdated DATETIME2 NOT NULL,
+    LoadDate DATETIME2 NOT NULL DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE dbo.Orders_ETL (
+    OrderID INT NOT NULL PRIMARY KEY,
+    CustomerID INT NOT NULL,
+    OrderDate DATETIME2 NOT NULL,
+    OrderStatus NVARCHAR(30) NOT NULL,
+    TotalAmount DECIMAL(12,2) NOT NULL,
+    LastUpdated DATETIME2 NOT NULL,
+    LoadDate DATETIME2 NOT NULL DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE dbo.OrderItems_ETL (
+    OrderItemID INT NOT NULL PRIMARY KEY,
+    OrderID INT NOT NULL,
+    ProductID INT NOT NULL,
+    Quantity INT NOT NULL,
+    UnitPrice DECIMAL(10,2) NOT NULL,
+    LineAmount DECIMAL(12,2) NOT NULL,
+    LastUpdated DATETIME2 NOT NULL,
+    LoadDate DATETIME2 NOT NULL DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE dbo.Products_Changes_Stage (
+    SYS_CHANGE_VERSION BIGINT NOT NULL,
+    SYS_CHANGE_OPERATION NCHAR(1) NOT NULL,
+    ProductID INT NULL,
+    ProductName NVARCHAR(100) NULL,
+    Category NVARCHAR(50) NULL,
+    UnitPrice DECIMAL(10,2) NULL,
+    IsActive BIT NULL,
+    LastUpdated DATETIME2 NULL
+);
+GO
+
+CREATE TABLE dbo.Orders_Changes_Stage (
+    SYS_CHANGE_VERSION BIGINT NOT NULL,
+    SYS_CHANGE_OPERATION NCHAR(1) NOT NULL,
+    OrderID INT NULL,
+    CustomerID INT NULL,
+    OrderDate DATETIME2 NULL,
+    OrderStatus NVARCHAR(30) NULL,
+    TotalAmount DECIMAL(12,2) NULL,
+    LastUpdated DATETIME2 NULL
+);
+GO
+
+CREATE TABLE dbo.OrderItems_Changes_Stage (
+    SYS_CHANGE_VERSION BIGINT NOT NULL,
+    SYS_CHANGE_OPERATION NCHAR(1) NOT NULL,
+    OrderItemID INT NULL,
+    OrderID INT NULL,
+    ProductID INT NULL,
+    Quantity INT NULL,
+    UnitPrice DECIMAL(10,2) NULL,
+    LineAmount DECIMAL(12,2) NULL,
+    LastUpdated DATETIME2 NULL
+);
+GO
