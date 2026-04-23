@@ -25,8 +25,8 @@ BEGIN
     SET
         RunStatus = 'Succeeded',
         EndTime = GETDATE(),
-        RowsCopied = @RowsCopied,
-        RowsMerged = @RowsMerged,
+        RowsCopied = COALESCE(@RowsCopied, l.RowsCopied),
+        RowsMerged = COALESCE(@RowsMerged, l.RowsMerged),
         WatermarkAfter = @WatermarkAfter
     FROM dbo.ETL_Run_Log l
     INNER JOIN LatestStarted s
