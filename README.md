@@ -6,125 +6,100 @@
 ![ETL](https://img.shields.io/badge/ETL-Incremental-success)
 ![GitHub](https://img.shields.io/badge/GitHub-Portfolio-black)
 
+---
+
 ## Overview
 
-This project demonstrates a cloud-based incremental ETL solution built in Microsoft Azure using **Azure SQL Database**, **SQL Change Tracking**, and **Azure Data Factory (ADF)**.
+Designed and built a production-style cloud ETL solution in Microsoft Azure using Azure SQL Database, SQL Change Tracking, and Azure Data Factory.
 
-The solution captures inserts, updates, and deletes from a source table and applies only new changes to a target table using a watermark-driven pipeline.
+The solution processes incremental changes across multiple business entities (Customers, Products, Orders, OrderItems) using watermark-driven pipelines, staging tables, stored procedures, orchestration pipelines, audit logging, failure handling, and transaction-safe MERGE logic.
+
+This project demonstrates a cloud-based incremental ETL solution using Azure SQL Database, SQL Change Tracking, and Azure Data Factory.
 
 ## Architecture
 
-1. Source data stored in `dbo.Customers`
-2. SQL Change Tracking records net row changes
-3. Watermark table stores the last processed version
-4. ADF extracts only new changes via stored procedure
-5. Changes load into a staging table
-6. MERGE procedure applies changes to target table `dbo.Customers_ETL`
-7. Watermark updates after successful load
+Source Tables -> Change Tracking -> Stored Procedures -> Stage Tables -> MERGE -> Target Tables -> Watermarks -> Audit Logs -> Master Pipeline
 
-![Architecture](images/architecture-diagram.png)
+## Business Entities
 
-## Technologies Used
-
-- Azure Data Factory
-- Azure SQL Database
-- T-SQL
-- ETL / ELT Design
-- Incremental Data Loading
-- Change Tracking
-- Data Pipeline Orchestration
-- Error Handling
-- Logging / Monitoring
-- Git / GitHub
-
-## Database Objects
-
-### Tables
-
-* `dbo.Customers` - Source table
-* `dbo.Customers_ETL` - Final target table
-* `dbo.Customers_Changes_Stage` - Staging table for deltas
-* `dbo.ETL_Watermark` - Stores last processed version
-
-### Stored Procedures
-
-* `dbo.usp_Get_Customer_Changes`
-* `dbo.usp_Merge_Customers_Changes`
-* `dbo.usp_Update_ETL_Watermark`
-* `dbo.usp_Clear_Customers_Changes_Stage`
-
-## Pipeline Flow
-
-1. Read new changes since watermark
-2. Truncate staging table
-3. Copy changes into stage
-4. Merge into target table
-5. Update watermark
-
-## Example Incremental Scenarios
-
-* New customer inserted -> added to target
-* Existing customer updated -> refreshed in target
-* Customer deleted -> removed from target
-
-## Key Skills Demonstrated
-
-* Incremental ETL design
-* Change data processing
-* Azure Data Factory orchestration
-* Stored procedure automation
-* MERGE logic for upserts/deletes
-* Cloud resource setup and management
-* Version control with GitHub
-
-## Repository Structure
-
-```text
-/sql   -> SQL scripts
-/adf   -> ADF exports / pipeline JSON
-/docs  -> Notes and architecture docs
-README.md
-```
-
-## How to Run
-
-1. Deploy Azure SQL resources
-2. Execute SQL scripts in order
-3. Publish ADF linked services, datasets, and pipelines
-4. Make source data changes
-5. Run pipeline `PL_Load_Customer_Changes`
-6. Validate target tables and watermark
-
-## Future Improvements
-
-* CI/CD with GitHub Actions or Azure DevOps
-* Parameterized multi-table framework
-* Logging and audit tables
-* Retry/error handling
-* Environment separation (Dev/Test/Prod)
-* Monitoring and alerts
-
-## Production-Style Enhancements
-
-This project was extended from a single-table demo into a multi-table retail ETL framework.
-
-### Added entities
 - Customers
 - Products
 - Orders
 - OrderItems
 
-### Production-style improvements
-- Master ADF orchestration pipeline
-- Per-table incremental pipelines
-- Watermark-based change tracking
-- Stage tables for each entity
-- MERGE procedures with transaction control
-- TRY/CATCH error handling
+## Technologies Used
+
+- Azure SQL Database
+- Azure Data Factory
+- T-SQL
+- SQL Change Tracking
+- Git / GitHub
+
+## Database Objects
+
+### Source Tables
+- dbo.Customers
+- dbo.Products
+- dbo.Orders
+- dbo.OrderItems
+
+### Target Tables
+- dbo.Customers_ETL
+- dbo.Products_ETL
+- dbo.Orders_ETL
+- dbo.OrderItems_ETL
+
+### Control Tables
+- dbo.ETL_Watermark
+- dbo.ETL_Run_Log
+
+## Pipelines
+
+- PL_Load_Customer_Changes
+- PL_Load_Product_Changes
+- PL_Load_Order_Changes
+- PL_Load_OrderItem_Changes
+- PL_Master_Retail_ETL
+
+## Production-Style Enhancements
+
+- Incremental watermark loads
+- Logging and audit tables
+- Failure handling
+- Transaction-safe MERGE
+- Multi-table orchestration
 - Duplicate protection
-- ETL audit logging
-- Failure logging
-- Dynamic row count logging
+
+## Example Incremental Scenarios
+
+- New customer added
+- Product price updated
+- Order status changed
+- New order item inserted
+
+## Repository Structure
+
+/adf
+/docs
+/images
+/sql
+README.md
+
+## How to Run
+
+1. Deploy Azure SQL Database and Azure Data Factory
+2. Execute SQL scripts in folder order
+3. Configure ADF linked services, datasets, and pipelines
+4. Run PL_Master_Retail_ETL
+5. Validate ETL tables, watermarks, and logs
+
+## Future Improvements
+
+- CI/CD
+- Scheduling
+- Alerts
+- Security
+- Data quality checks
 
 ## Author
 
