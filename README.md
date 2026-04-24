@@ -100,6 +100,28 @@ README.md
 * Environment separation (Dev/Test/Prod)
 * Monitoring and alerts
 
+## Production-Style Enhancements
+
+This project was extended from a single-table demo into a multi-table retail ETL framework.
+
+### Added entities
+- Customers
+- Products
+- Orders
+- OrderItems
+
+### Production-style improvements
+- Master ADF orchestration pipeline
+- Per-table incremental pipelines
+- Watermark-based change tracking
+- Stage tables for each entity
+- MERGE procedures with transaction control
+- TRY/CATCH error handling
+- Duplicate protection
+- ETL audit logging
+- Failure logging
+- Dynamic row count logging
+
 ## Author
 
 Marcello Da Silva Lopes
