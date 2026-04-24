@@ -95,6 +95,10 @@ README.md
 4. Run PL_Master_Retail_ETL
 5. Validate ETL tables, watermarks, and logs
 
+### Master Orchestration Pipeline
+
+![ADF Master](images/adf-master-pipeline.png)
+
 ## Future Improvements
 
 - CI/CD
