@@ -20,6 +20,8 @@ This project demonstrates a cloud-based incremental ETL solution using Azure SQL
 
 Source Tables -> Change Tracking -> Stored Procedures -> Stage Tables -> MERGE -> Target Tables -> Watermarks -> Audit Logs -> Master Pipeline
 
+![Architecture](images/architecture-diagram.png)
+
 ## Business Entities
 
 - Customers
