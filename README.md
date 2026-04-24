@@ -81,11 +81,11 @@ Source Tables -> Change Tracking -> Stored Procedures -> Stage Tables -> MERGE -
 
 ## Repository Structure
 
-/adf
-/docs
-/images
-/sql
-README.md
+- adf
+- docs
+- images
+- sql
+- README.md
 
 ## How to Run
 
