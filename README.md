@@ -26,12 +26,16 @@ The solution captures inserts, updates, and deletes from a source table and appl
 
 ## Technologies Used
 
-* Azure SQL Database
-* Azure Data Factory (V2)
-* T-SQL
-* SQL Change Tracking
-* Git / GitHub
-* SSMS
+- Azure Data Factory
+- Azure SQL Database
+- T-SQL
+- ETL / ELT Design
+- Incremental Data Loading
+- Change Tracking
+- Data Pipeline Orchestration
+- Error Handling
+- Logging / Monitoring
+- Git / GitHub
 
 ## Database Objects
 
